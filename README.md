@@ -38,6 +38,13 @@ This will build the docker image for Janus, as well as spin up two containers:
 * One named `janus` running on port 23889
 * Another one named `qtum` running on port 3889
 
+`make quick-start` will also fund the tests accounts with QTUM in order for you to start testing and developing locally. Janus maps the base58 Qtum addresses of the Qtum node \(`qtum` container\) to its unique hex address, here's an example from the accounts that come with Janus' local setup:
+
+```text
+- qUbxboqjBRp96j3La8D1RYkyqx5uQbJPoW (hex 0x7926223070547d2d15b2ef5e7383e541c338ffe9 )
+- qLn9vqbr2Gx3TsVR9QyTVB5mrMoh4x43Uf (hex 0x2352be3db3177f0a07efbe6da5857615b8c9901d )
+```
+
 Additionally, if you need or want to make changes and or additions to Janus, but don't want to go through the hassle of rebuilding the container, you can run the following command at the project root level:
 
 ```text
