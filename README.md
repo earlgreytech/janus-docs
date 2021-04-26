@@ -2,7 +2,7 @@
 description: 'https://github.com/qtumproject/janus'
 ---
 
-# Local Development
+# Getting Started
 
 ## Requirements
 
