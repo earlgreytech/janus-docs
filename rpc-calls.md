@@ -1386,9 +1386,7 @@ Return see See [eth\_getFilterChanges](https://app.gitbook.com/@earl-grey-tech/s
 
 ### qtum\_getUTXOs
 
-Returns an array containing a set of UTXOs given an address \(must be an unlocked addres\) for which the the total amount \(the sum of the amount of each individual UTXO\) is greater than a specified **minimum amount**
-
-**NOTE:** This call will only work if the address used is part of the wallet used to make the call
+Returns an array containing a set of spendable Vouts given an address and a minimum amount desire. The call will return an error if the address is not able to make up for the minimum amount with their set of UTXOs.
 
 **Parameters** 
 
@@ -1411,17 +1409,6 @@ params: [
   {
     "txid" : "txid",          (string) the transaction id 
     "vout" : n,               (numeric) the vout value
-    "address" : "address",    (string) the qtum address
-    "label" : "label",        (string) The associated label, or "" for the default label
-    "scriptPubKey" : "key",   (string) the script key
-    "amount" : x.xxx,         (numeric) the transaction output amount in QTUM
-    "confirmations" : n,      (numeric) The number of confirmations
-    "redeemScript" : n        (string) The redeemScript if scriptPubKey is P2SH
-    "spendable" : xxx,        (bool) Whether we have the private keys to spend this output
-    "solvable" : xxx,         (bool) Whether we know how to spend this output, ignoring the lack of keys
-    "safe" : xxx              (bool) Whether this output is considered safe to spend. Unconfirmed transactions
-                              from outside keys and unconfirmed replacement transactions are considered unsafe
-                              and are not eligible for spending by fundrawtransaction and sendtoaddress.
   }
   ,...
 ]
@@ -1434,31 +1421,16 @@ $ curl --header 'Content-Type: application/json' --data \
  '{"jsonrpc":"2.0","method":"eth_uninstallFilter","params":["0x7926223070547d2d15b2ef5e7383e541c338ffe9", 1], "id":10}' \
   'http://localhost:23889'
   
-// Result
+// Result (Assuming the vout for the txid has an amount equal to or greater than 1 QTUM
 {
   "id":10,
   "jsonrpc":"2.0",
   "result": [{
-    "address":"qUbxboqjBRp96j3La8D1RYkyqx5uQbJPoW",
     "txid":"a54963eadaf88f0e30340c3649f426181f5c9aff3580b6a44923a1e796e3d7ff",
     "vout":0,
-    "amount":"20000",
-    "safe":true,
-    "spendable":true,
-    "solvable":true,
-    "label":"",
-    "confirmations":50696,
-    "scriptPubKey":"76a9147926223070547d2d15b2ef5e7383e541c338ffe988ac",
-    "redeemScript":""},
-    {
-      ...
-    },
-    ...
-    ]
+  ]
 }
 ```
-
-Return see See [eth\_getFilterChanges](https://app.gitbook.com/@earl-grey-tech/s/janus-docs/~/drafts/-MYu8ax0AMrsdcYZw6US/rpc-calls#eth_getfilterchanges)
 
 
 
